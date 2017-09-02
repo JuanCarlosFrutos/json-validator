@@ -4,6 +4,7 @@ interface ThemeInterface {
   primaryColorInverted?: string;
   sucess?: string;
   error?: string;
+  
 }
 
 export default ThemeInterface;

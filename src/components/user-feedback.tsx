@@ -5,6 +5,7 @@ interface UserFeedbackProps {
 
     userFeedback: string;
     className?: string;
+    error: boolean|undefined;
 
 }
 
@@ -28,10 +29,11 @@ const StyledUserFeedback = styled(UserFeedback)`
     margin: 10px;
     width: 80%;
     padding: 0.5em;
-    background: ${props => props.theme.error};
+    background: ${props => props.error ? props.theme.error : props.theme.sucess};
     color: white;
-    border-radius: 3px;
-    border-left: 5px solid red;
+    border-radius: 3px; 
+    border-left: 5px solid;
+    border-color: ${props => props.error ? 'red' : 'green'};
 `;
 
 export default StyledUserFeedback;

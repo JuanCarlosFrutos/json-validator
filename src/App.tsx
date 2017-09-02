@@ -12,6 +12,7 @@ interface stateApp {
 
   text: string;
   userFeedback: string;
+  error: boolean|undefined;
 
 }
 
@@ -20,7 +21,7 @@ class App extends React.Component <{}, stateApp> {
   constructor() {
     super();
 
-    let initialState: stateApp = {text: '', userFeedback: ''}
+    let initialState: stateApp = {text: '', userFeedback: '', error: undefined}
     this.state = initialState;
 
   }
@@ -29,9 +30,9 @@ class App extends React.Component <{}, stateApp> {
 
     const theme: Theme = {
       primaryColor: '#AA3939',
-      secondaryColor: '#FFFFFF',
+      secondaryColor: '#FFD9D9',
       sucess: '#87FF74',
-      error: '#FF747E'
+      error: '#FF747E',
     };
 
     return (
@@ -45,12 +46,15 @@ class App extends React.Component <{}, stateApp> {
                   userFeedback={this.state.userFeedback}
                   handleClickValidate={this.handleClickValidate}
                   handleChangeText={this.handleChangeText}
+                  handleClickClear={this.handleClickClear}
+                  error={this.state.error}
           />
         </ThemeProvider>
           { this.state.userFeedback !== '' &&
             <ThemeProvider theme={theme}>
             <UserFeedback 
               userFeedback={this.state.userFeedback}
+              error={this.state.error}
             />
             </ThemeProvider>
           }
@@ -64,6 +68,7 @@ class App extends React.Component <{}, stateApp> {
   private handleClickValidate = (event: any) => {
 
     let newFeedback: string = '';
+    let error: boolean = false;
 
     try {
 
@@ -73,15 +78,26 @@ class App extends React.Component <{}, stateApp> {
     }catch (e){
 
       newFeedback = e.message
+      error = true;
 
     }
 
     this.setState ({
-      userFeedback: newFeedback
+      userFeedback: newFeedback,
+      error: error
     }) 
 
   }
 
+  private handleClickClear = (event: any) => {
+
+    this.setState({
+      error: undefined,
+      text: '',
+      userFeedback: ''
+    })
+
+  }
 
   private handleChangeText = (event: any) => {
 
