@@ -4,6 +4,10 @@ import styled from 'styled-components';
 interface ValidatorProps {
 
     className?: string;
+    handleClickValidate: (event: any) => void
+    handleChangeText: (event: any) => void
+    text: string;
+    userFeedback: string;
 
 }
 
@@ -16,11 +20,15 @@ class Validator extends React.Component <ValidatorProps, {}> {
     render () {
         return (
           <div className={this.props.className}>
-            <textarea />
-            <button>Link</button>
+            <textarea 
+                    onChange={this.props.handleChangeText}
+                    value={this.props.text}
+            />
+            <button onClick={this.props.handleClickValidate}>Link</button>
           </div>
         );
     }
+
 }
 
 const StyledValidator = styled(Validator)`

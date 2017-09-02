@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const logo = require('../logo.svg');
+const logo = require('../logo.png');
 
 interface FooterProps {
 

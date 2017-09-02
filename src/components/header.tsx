@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const logo = require('../logo.svg');
+const logo = require('../logo.png');
 
 interface HeadProps {
 
@@ -12,7 +12,7 @@ interface HeadProps {
 
 const Head: React.StatelessComponent<HeadProps> = (props: HeadProps) => (
     <div className={props.className}>
-        <img height="42" width="42" src={logo}/>
+        <img height="190" width="190" src={logo}/>
     </div>
 );
 

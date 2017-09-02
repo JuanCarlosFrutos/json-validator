@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface UserFeedbackProps {
 
+    userFeedback: string;
     className?: string;
 
 }
@@ -16,7 +17,7 @@ class UserFeedback extends React.Component <UserFeedbackProps, {}> {
     render () {
         return (
           <div className={this.props.className}>
-            <label> User Feedback </label>
+            <label> {this.props.userFeedback} </label>
           </div>
         );
     }
