@@ -28,24 +28,31 @@ class App extends React.Component <{}, stateApp> {
   render() {
 
     const theme: Theme = {
-      primaryColor: 'grey'
+      primaryColor: '#AA3939',
+      secondaryColor: '#7B829A'
     };
 
     return (
       <div className="App">
         <ThemeProvider theme={theme}>
-          <Head />
+          <Head className='header'/>
         </ThemeProvider>
-        <Validator 
-                text={this.state.text}
-                userFeedback={this.state.userFeedback}
-                handleClickValidate={this.handleClickValidate}
-                handleChangeText={this.handleChangeText}
-        />
-        <UserFeedback 
-                userFeedback={this.state.userFeedback}
-        />
-        <Footer />
+        <div className='board'>
+          <Validator 
+                  text={this.state.text}
+                  userFeedback={this.state.userFeedback}
+                  handleClickValidate={this.handleClickValidate}
+                  handleChangeText={this.handleChangeText}
+          />
+          { this.state.userFeedback !== '' &&
+            <UserFeedback 
+              userFeedback={this.state.userFeedback}
+            />
+          }
+        </div>
+        <ThemeProvider theme={theme}>
+          <Footer className='footer' />
+        </ThemeProvider>
       </div>
     );
   }

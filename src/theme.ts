@@ -1,5 +1,6 @@
 interface ThemeInterface {
   primaryColor: string;
+  secondaryColor?: string;
   primaryColorInverted?: string;
 }
 

@@ -12,13 +12,16 @@ interface HeadProps {
 
 const Head: React.StatelessComponent<HeadProps> = (props: HeadProps) => (
     <div className={props.className}>
-        <img height="190" width="190" src={logo}/>
+        <img height="75" width="150" src={logo}/>
     </div>
 );
 
 const StyledHead = styled(Head)`
+
+	margin-top: 0px;
+	position: fixed;
     width: 100%;
-    background: ${props => props.theme.primaryColor};
+    background: ${props => props.theme.secondaryColor};
 `;
 
 export default StyledHead;
