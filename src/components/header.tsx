@@ -17,9 +17,7 @@ const Head: React.StatelessComponent<HeadProps> = (props: HeadProps) => (
 );
 
 const StyledHead = styled(Head)`
-
 	margin-top: 0px;
-	position: fixed;
     width: 100%;
     background: ${props => props.theme.secondaryColor};
 `;

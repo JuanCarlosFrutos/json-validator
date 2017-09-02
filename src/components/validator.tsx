@@ -39,15 +39,23 @@ const StyledValidator = styled(Validator)`
     align-items: center;
     margin: 10px;
     width: 100%;
-    height: 80%;
 
     textarea {
         resize: none;
+        border-style: solid;
+        border-width: 5px;
+        border-color: black;
         width: 80%;
-        height: 80%;
+        height: 30em;
     }
 
     button {
+        background: ${props => props.theme.secondaryColor};
+        color: 'palevioletred';
+        font-size: 1.5em;
+        padding: 0.25em 1em;
+        margin: 0.5em;
+        border-radius: 6px;
         width: 80%;
     }
 

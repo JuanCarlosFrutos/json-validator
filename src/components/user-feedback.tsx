@@ -24,13 +24,14 @@ class UserFeedback extends React.Component <UserFeedbackProps, {}> {
 }
 
 const StyledUserFeedback = styled(UserFeedback)`
-    border-radius: 3px;
     padding: 0.5rem 0;
     margin: 10px;
     width: 80%;
-    background: green;
+    padding: 0.5em;
+    background: ${props => props.theme.error};
     color: white;
-    border: 2px solid green;
+    border-radius: 3px;
+    border-left: 5px solid red;
 `;
 
 export default StyledUserFeedback;

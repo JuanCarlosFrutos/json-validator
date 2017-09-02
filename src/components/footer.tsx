@@ -16,7 +16,7 @@ const Footer: React.StatelessComponent<FooterProps> = (props: FooterProps) => (
 );
 
 const StyledFooter = styled(Footer)`
-    width:80%;
+    width:100%;
     margin-bottom: 10px;
     background: ${props => props.theme.secondaryColor};
 `;
