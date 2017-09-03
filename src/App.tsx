@@ -28,17 +28,26 @@ class App extends React.Component <{}, stateApp> {
 
   render() {
 
-    const theme: Theme = {
+    const themeError: Theme = {
       primaryColor: '#AA3939',
       secondaryColor: '#FFD9D9',
       sucess: '#87FF74',
       error: '#FF747E',
     };
 
+    const themeSucess: Theme = {
+      primaryColor: '#AA3939',
+      secondaryColor: '#AECCAE',
+      sucess: '#AECCAE',
+      error: '#FF747E',
+    };
+
+    const theme: Theme = this.state.error === true ? themeError : themeSucess;
+
     return (
       <div className="App">
         <ThemeProvider theme={theme}>
-          <Head />
+          <Head error={this.state.error}/>
         </ThemeProvider>
         <ThemeProvider theme={theme}>
           <Validator 
@@ -82,9 +91,12 @@ class App extends React.Component <{}, stateApp> {
 
     }
 
+    let textFormat = validator.formatter.formatJson(this.state.text);
+
     this.setState ({
       userFeedback: newFeedback,
-      error: error
+      error: error,
+      text: textFormat
     }) 
 
   }

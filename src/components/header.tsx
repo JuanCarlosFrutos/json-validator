@@ -7,19 +7,30 @@ interface HeadProps {
 
     theme?: object;
     className?: string;
+    error?: boolean;
 
 }
 
 const Head: React.StatelessComponent<HeadProps> = (props: HeadProps) => (
     <div className={props.className}>
-        <label>JSON<span>✔</span></label>
+        <label>JSON
+        	{
+        		props.error===false &&
+				<span>✔</span>
+        	}
+        	{
+        		props.error===true &&
+				<span>✘</span>        		
+        	}
+
+        </label>
     </div>
 );
 
 const StyledHead = styled(Head)`
 	
 	span {
-		color: green;
+		color: ${props => props.error ? 'red' : 'green'};
 	}
 
 	font-size: 4em;

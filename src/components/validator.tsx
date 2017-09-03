@@ -9,7 +9,7 @@ interface ValidatorProps {
     handleClickClear: (event: any) => void;
     text: string;
     userFeedback: string;
-    error: boolean|undefined;
+    error?: boolean|undefined;
 
 }
 
@@ -48,7 +48,7 @@ const StyledValidator = styled(Validator)`
         resize: none;
         border-style: solid;
         border-width: 5px;
-        border-color: ${props => props.error ? props.theme.error : 'black'};
+        border-color: ${props => props.error ? props.theme.error : props.theme.sucess};
         width: 80%;
         height: 30em;
         background: url(http://gph.is/1JVYypu);
