@@ -31,6 +31,7 @@ class Validator extends React.Component <ValidatorProps, {}> {
             <button className='btn-4' onClick={this.props.handleClickValidate}>Validate</button>
             <button onClick={this.props.handleClickClear}> Clear </button>
           </div>
+
         );
     }
 
@@ -44,16 +45,20 @@ const StyledValidator = styled(Validator)`
     margin: 10px;
     width: 100%;
 
+    #example-one {
+        width: 80%;
+        border-style: solid;
+        border-color: black;
+        border-width: 5px;
+    }
+
     textarea {
         resize: none;
         border-style: solid;
         border-width: 5px;
-        border-color: ${props => props.error ? props.theme.error : props.theme.sucess};
+        border-color: ${props => props.error ? props.theme.secondaryColorError : props.theme.secondaryColorSucess};
         width: 80%;
         height: 30em;
-        background: url(http://gph.is/1JVYypu);
-        background-position: bottom right;
-        background-repeat: no-repeat;
     }
 
     button {
@@ -62,8 +67,8 @@ const StyledValidator = styled(Validator)`
         font-size: 1.5em;
         padding: 0.25em 1em;
         margin: 0.5em;
-        border-radius: 6px;
         width: 80%;
+        border-radius: 6px;
         border-bottom: 3px solid grey;
         border-right: 3px solid grey;
     }

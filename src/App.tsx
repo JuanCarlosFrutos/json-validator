@@ -6,6 +6,7 @@ import Footer from './components/footer';
 import UserFeedback from './components/user-feedback';
 import { ThemeProvider } from 'styled-components';
 import Theme from './theme';
+import { standarTheme, noResquest } from './shared/themes'
 import './App.css';
 
 interface stateApp {
@@ -28,21 +29,7 @@ class App extends React.Component <{}, stateApp> {
 
   render() {
 
-    const themeError: Theme = {
-      primaryColor: '#AA3939',
-      secondaryColor: '#FFD9D9',
-      sucess: '#87FF74',
-      error: '#FF747E',
-    };
-
-    const themeSucess: Theme = {
-      primaryColor: '#AA3939',
-      secondaryColor: '#AECCAE',
-      sucess: '#AECCAE',
-      error: '#FF747E',
-    };
-
-    const theme: Theme = this.state.error === true ? themeError : themeSucess;
+    const theme: Theme = this.state.error === undefined ? noResquest : standarTheme;
 
     return (
       <div className="App">

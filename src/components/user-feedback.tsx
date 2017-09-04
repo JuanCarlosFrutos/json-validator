@@ -29,11 +29,11 @@ const StyledUserFeedback = styled(UserFeedback)`
     margin: 10px;
     width: 80%;
     padding: 0.5em;
-    background: ${props => props.error ? props.theme.error : props.theme.sucess};
-    color: white;
+    background: ${props => props.error ? props.theme.primaryColorError : props.theme.primaryColorSucess};
+    color: black;
     border-radius: 3px; 
     border-left: 5px solid;
-    border-color: ${props => props.error ? 'red' : 'green'};
+    border-color: ${props => props.error ? props.theme.secondaryColorError : props.theme.secondaryColorSucess};
 `;
 
 export default StyledUserFeedback;

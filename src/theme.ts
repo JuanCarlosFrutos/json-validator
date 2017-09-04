@@ -1,9 +1,8 @@
 interface ThemeInterface {
-  primaryColor: string;
-  secondaryColor?: string;
-  primaryColorInverted?: string;
-  sucess?: string;
-  error?: string;
+  primaryColorError: string;
+  primaryColorSucess: string;
+  secondaryColorSucess?: string;
+  secondaryColorError?: string;
   
 }
 

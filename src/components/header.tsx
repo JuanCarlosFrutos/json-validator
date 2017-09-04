@@ -30,7 +30,7 @@ const Head: React.StatelessComponent<HeadProps> = (props: HeadProps) => (
 const StyledHead = styled(Head)`
 	
 	span {
-		color: ${props => props.error ? 'red' : 'green'};
+		color: ${props => props.error ? props.theme.secondaryColorError : props.theme.secondaryColorSucess};
 	}
 
 	font-size: 4em;
@@ -39,7 +39,7 @@ const StyledHead = styled(Head)`
 	justify-content: center;
 	margin-top: 0px;
     width: 100%;
-    background: ${props => props.theme.secondaryColor};
+    background: ${props => props.error ? props.theme.primaryColorError : props.theme.primaryColorSucess};
 `;
 
 export default StyledHead;
