@@ -1,111 +1,141 @@
 import * as React from 'react';
 import * as validator from 'jsonlint';
-import Validator from './components/validator';
+import Validator from './components/validator/validator';
 import Head from './components/header';
-import Footer from './components/footer';
-import UserFeedback from './components/user-feedback';
+import UserFeedback from './components/user-feedback/user-feedback';
 import { ThemeProvider } from 'styled-components';
+import { userFeedback } from './shared/interfaces';
 import Theme from './theme';
-import { standarTheme, noResquest } from './shared/themes'
+import { standarTheme, noResquest } from './shared/themes';
 import './App.css';
+require('codemirror/theme/json.css');
+require('codemirror/addon/selection/active-line.js');
+import * as shortid from 'shortid';
 
-interface stateApp {
+interface StateApp {
 
-  text: string;
-  userFeedback: string;
+  className?: string;
+  userFeedback: Array<userFeedback>;
+  optionsCodeMirror: any;
   error: boolean|undefined;
+  text: string;
 
 }
 
-class App extends React.Component <{}, stateApp> {
+class App extends React.Component <{}, StateApp> {
+
+  // It holds default menssage info , it appears when doesnt exists previous precess 
+  // messages and it explains how app works.
+  private userFeedback: userFeedback;
 
   constructor() {
     super();
 
-    let initialState: stateApp = {text: '', userFeedback: '', error: undefined}
+    // Config default message.
+
+    this.userFeedback = {id: shortid.generate(), message: 'Instructions:', error: undefined}
+
+    // Config codemirror.
+
+    let options: any = {
+        lineNumbers: true,
+        autofocus: true,
+        theme: 'json',
+        activeline: true,
+        styleActiveLine: true,
+        lineWrapping: true
+    }
+
+    let userFeedback: userFeedback = {error: undefined, message: 'info', id: shortid.generate()};
+    let initialState: StateApp = {text: '', userFeedback: [userFeedback], error: undefined, optionsCodeMirror: options};
     this.state = initialState;
 
   }
 
   render() {
 
-    const theme: Theme = this.state.error === undefined ? noResquest : standarTheme;
+    //It use the first element in array notification, it is the last process text.
+    const theme: Theme = this.state.userFeedback[0].error === undefined ? noResquest : standarTheme;
+    let error: boolean|undefined = this.state.userFeedback[0].error;
 
     return (
+
+     <ThemeProvider theme={theme}>
       <div className="App">
-        <ThemeProvider theme={theme}>
-          <Head error={this.state.error}/>
-        </ThemeProvider>
-        <ThemeProvider theme={theme}>
-          <Validator 
-                  text={this.state.text}
-                  userFeedback={this.state.userFeedback}
-                  handleClickValidate={this.handleClickValidate}
-                  handleChangeText={this.handleChangeText}
-                  handleClickClear={this.handleClickClear}
-                  error={this.state.error}
-          />
-        </ThemeProvider>
-          { this.state.userFeedback !== '' &&
-            <ThemeProvider theme={theme}>
-            <UserFeedback 
-              userFeedback={this.state.userFeedback}
-              error={this.state.error}
+          <Head error={error}/>
+          <div className='board'>
+            <Validator 
+                    text={this.state.text}
+                    handleClickValidate={this.handleClickValidate}
+                    handleChangeText={this.handleChangeText}
+                    handleClickClear={this.handleClickClear}
+                    error={error}
+                    optionsCodeMirror={this.state.optionsCodeMirror}
             />
-            </ThemeProvider>
-          }
-        <ThemeProvider theme={theme}>
-          <Footer />
-        </ThemeProvider>
+            { this.state.userFeedback.length > 0 &&
+              <UserFeedback 
+                userFeedback={this.state.userFeedback}
+              />
+            }
+          </div>
       </div>
+    </ThemeProvider>
     );
   }
 
-  private handleClickValidate = (event: any) => {
+  private handleClickValidate = (event: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>): void => {
 
-    let newFeedback: string = '';
+    let newFeedback: userFeedback = {id: shortid.generate(), message: '', error: false};
     let error: boolean = false;
 
     try {
 
       validator.parse(this.state.text);
-      newFeedback = 'JSON valid';
+      newFeedback.message = 'JSON valid';
 
-    }catch (e){
+    }catch (e) {
 
-      newFeedback = e.message
-      error = true;
+      newFeedback.message = e.message;
+      newFeedback.error = true;
 
     }
 
     let textFormat = validator.formatter.formatJson(this.state.text);
 
+    // Take current options.
+    let currentOptions: any = this.state.optionsCodeMirror;
+    // Add new value.
+    currentOptions.value = textFormat;
+
+    let arrayFeedback: Array<userFeedback> = this.state.userFeedback;
+    arrayFeedback.unshift(newFeedback);
+
     this.setState ({
-      userFeedback: newFeedback,
+      userFeedback: arrayFeedback,
       error: error,
-      text: textFormat
-    }) 
+      text: textFormat,
+      optionsCodeMirror: currentOptions
+    });
 
   }
 
-  private handleClickClear = (event: any) => {
+  private handleClickClear = (event: MouseEvent) => {
 
     this.setState({
+      userFeedback: [this.userFeedback],
       error: undefined,
       text: '',
-      userFeedback: ''
-    })
+    });
 
   }
 
-  private handleChangeText = (event: any) => {
+  private handleChangeText = (text: string) => {
 
     this.setState({
-      text: event.target.value
-    })
+      text: text
+    });
 
   }
-
 
 }
 

@@ -3,7 +3,7 @@ import Theme from '../theme';
 export const standarTheme: Theme = {
 
       primaryColorError: '#AA3939',
-      primaryColorSucess: '#AECCAE',
+      primaryColorSucess: '#2D882D',
       secondaryColorError: 'red',
       secondaryColorSucess: 'green'
 
@@ -11,9 +11,9 @@ export const standarTheme: Theme = {
 
 export const noResquest: Theme = {
 
-      primaryColorError: '#FFF',
-      primaryColorSucess: '#FFF',
-      secondaryColorError: '#FFF',
-      secondaryColorSucess: '#FFF'
+      primaryColorError: '#226666',
+      primaryColorSucess: '#226666',
+      secondaryColorError: '#226666',
+      secondaryColorSucess: '#226666'
 
 };

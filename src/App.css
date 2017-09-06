@@ -1,7 +1,10 @@
 .App {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+}
+
+.board {
+	display: flex;
 }
 
 .App-intro {
