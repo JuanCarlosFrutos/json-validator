@@ -5,6 +5,7 @@
 
 .board {
 	display: flex;
+	width: 100%;
 }
 
 .App-intro {

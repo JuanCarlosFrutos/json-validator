@@ -17,12 +17,6 @@ interface ValidatorProps {
 
 }
 
-interface ValidatorState {
-
-    doc: CodeMirror.Doc;
-
-}
-
 /*
  * Page that shows header and search-result-list.
  */
@@ -30,13 +24,14 @@ interface ValidatorState {
 class Validator extends React.Component <ValidatorProps, {}> {
 
     private codeMirror: ReactCodeMirror.ReactCodeMirror;
+    private docCodeMirror: CodeMirror.Doc;
 
     componentDidMount () {
 
         // instance of codeMirror object, now I can configure it.
         let instanceCodeMirror: CodeMirror.Editor = this.codeMirror.getCodeMirror();
 
-        let doc: CodeMirror.Doc = instanceCodeMirror.getDoc();
+        this.docCodeMirror = instanceCodeMirror.getDoc();
 
         instanceCodeMirror.setSize("100%","30em");
 
@@ -44,7 +39,12 @@ class Validator extends React.Component <ValidatorProps, {}> {
 
     componentWillUpdate(nextProps: ValidatorProps, {}) {
 
-
+        let position: CodeMirror.Position = {line:5, ch: 3};
+        console.log(this.docCodeMirror.getValue());
+        this.docCodeMirror.setCursor(position);
+        let instance: CodeMirror.Editor = this.codeMirror.getCodeMirror();
+        instance.setOption('styleActiveLine', false);
+        
 
     }
 
@@ -56,14 +56,12 @@ class Validator extends React.Component <ValidatorProps, {}> {
                 <button onClick={this.props.handleClickValidate}>Validate</button>
                 <button onClick={this.props.handleClickClear}> Clear </button>
             </StyledMenu>
-            <div className="codemirror">
-                <CodeMirror 
-                        value={this.props.text} 
-                        onChange={this.props.handleChangeText} 
-                        options={this.props.optionsCodeMirror}
-                        ref={(codeMirror: any) => {this.codeMirror = codeMirror}}
-                />
-            </div>
+            <CodeMirror 
+                    value={this.props.text} 
+                    onChange={this.props.handleChangeText} 
+                    options={this.props.optionsCodeMirror}
+                    ref={(codeMirror: any) => {this.codeMirror = codeMirror}}
+            />
           </div>
 
         );
@@ -72,18 +70,9 @@ class Validator extends React.Component <ValidatorProps, {}> {
 }
 
 const StyledValidator = styled(Validator)`
-
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    margin: 10px;
-    .codemirror {
-        width: 50em;
-        border-style: solid;
-        border-width: 5px;
-        border-color: ${props => props.error ? props.theme.secondaryColorError : props.theme.secondaryColorSucess};
-        border-radius: 6px;
-    }
 `;
 
 export default StyledValidator;

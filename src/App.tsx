@@ -6,7 +6,7 @@ import UserFeedback from './components/user-feedback/user-feedback';
 import { ThemeProvider } from 'styled-components';
 import { userFeedback } from './shared/interfaces';
 import Theme from './theme';
-import { standarTheme, noResquest } from './shared/themes';
+import { standarTheme, noResquest, codeMirrorThemes } from './shared/themes';
 import './App.css';
 require('codemirror/theme/json.css');
 require('codemirror/addon/selection/active-line.js');
@@ -41,8 +41,7 @@ class App extends React.Component <{}, StateApp> {
         lineNumbers: true,
         autofocus: true,
         theme: 'json',
-        activeline: true,
-        styleActiveLine: true,
+        styleActiveLine: false,
         lineWrapping: true
     }
 
@@ -62,7 +61,11 @@ class App extends React.Component <{}, StateApp> {
 
      <ThemeProvider theme={theme}>
       <div className="App">
-          <Head error={error}/>
+          <Head 
+              error={error}
+              codeMirrorThemes={codeMirrorThemes}
+              handleChangeCodeMirrorTheme={this.handleChangeCodeMirrorTheme}
+          />
           <div className='board'>
             <Validator 
                     text={this.state.text}
@@ -135,6 +138,10 @@ class App extends React.Component <{}, StateApp> {
       text: text
     });
 
+  }
+
+  private handleChangeCodeMirrorTheme = (event: any) => {
+    console.log(event);
   }
 
 }

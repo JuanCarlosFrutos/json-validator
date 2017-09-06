@@ -17,3 +17,5 @@ export const noResquest: Theme = {
       secondaryColorSucess: '#226666'
 
 };
+
+export const codeMirrorThemes: Array<any> = [{label:'dracula' ,value:'dracula'}];
