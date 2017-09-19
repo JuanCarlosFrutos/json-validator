@@ -20,7 +20,7 @@ class UserFeedback extends React.Component <UserFeedbackProps, {}> {
 
         return (
           <div className={this.props.className}>
-            <ul className="list-group searchFeedContainer">
+            <ul>
                 { this.props.userFeedback.map((userFeedback: userFeedback) => (
                 <li key={userFeedback.id}>
                     <StyledUserMessage 
@@ -36,10 +36,20 @@ class UserFeedback extends React.Component <UserFeedbackProps, {}> {
 }
 
 const StyledUserFeedback = styled(UserFeedback)`
-    display: flex;
+    
     width: 100%;
+    background: black;
 
     ul {
+        flex-direction: column;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    li {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
       list-style: none;
     }
 `

@@ -18,9 +18,10 @@ const UserMessage: React.StatelessComponent<UserMessageProps> = (props: UserMess
 
 const StyledUserMessage = styled(UserMessage)`
     
-    width: 100%;
-    padding: 0.5rem;
-    margin: 1em;
+    display: flex;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    padding: 0.5em;
     heigth: auto;
     background: ${props => props.error ? props.theme.primaryColorError : props.theme.primaryColorSucess};
     color: black;

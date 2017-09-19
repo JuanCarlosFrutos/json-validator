@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import * as Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 // const logo = require('../logo.png');
@@ -17,12 +16,6 @@ interface HeadProps {
 
 const Head: React.StatelessComponent<HeadProps> = (props: HeadProps) => (
     <div className={props.className}>
-        <Select
-              name="codeMirrorThemes"
-              value="Type"
-              options={props.codeMirrorThemes}
-              onChange={props.handleChangeCodeMirrorTheme}
-        />
         <label>JSON
             {
                 props.error === false &&
@@ -44,7 +37,7 @@ const StyledHead = styled(Head)`
     }
 
     border-radius: 6px;
-    font-size: 1em;
+    font-size: 3em;
     font-weight: bold;
     display: flex;
     justify-content: space-around;

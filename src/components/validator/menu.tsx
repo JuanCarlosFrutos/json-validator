@@ -25,7 +25,8 @@ const StyledMenu = styled(Menu)`
         color: black;
         font-size: 1.5em;
         padding: 0.25em 1em;
-        margin: 10px;
+        margin: 0.5em;
+        margin-left: 1em;
         width: 80%;
         border-radius: 6px;
         border-bottom: 3px solid grey;

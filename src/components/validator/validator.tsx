@@ -1,9 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import StyledUserFeedback from '../user-feedback/user-feedback';
 import * as CodeMirror from 'react-codemirror';
 import 'codemirror/theme/dracula.css';
 import StyledMenu from './menu';
-require('codemirror/lib/codemirror.css');
+import { userFeedback } from '../../shared/interfaces';
+require('./codemirror.css');
 
 interface ValidatorProps {
 
@@ -14,6 +16,7 @@ interface ValidatorProps {
     text: string;
     error?: boolean|undefined;
     optionsCodeMirror: any;
+    userFeedback: userFeedback;
 
 }
 
@@ -61,6 +64,9 @@ class Validator extends React.Component <ValidatorProps, {}> {
                     onChange={this.props.handleChangeText} 
                     options={this.props.optionsCodeMirror}
                     ref={(codeMirror: any) => {this.codeMirror = codeMirror}}
+            />
+            <StyledUserFeedback
+                    userFeedback={this.props.userFeedback}
             />
           </div>
 

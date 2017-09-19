@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as validator from 'jsonlint';
 import Validator from './components/validator/validator';
 import Head from './components/header';
-import UserFeedback from './components/user-feedback/user-feedback';
 import { ThemeProvider } from 'styled-components';
 import { userFeedback } from './shared/interfaces';
 import Theme from './theme';
@@ -66,7 +65,6 @@ class App extends React.Component <{}, StateApp> {
               codeMirrorThemes={codeMirrorThemes}
               handleChangeCodeMirrorTheme={this.handleChangeCodeMirrorTheme}
           />
-          <div className='board'>
             <Validator 
                     text={this.state.text}
                     handleClickValidate={this.handleClickValidate}
@@ -74,13 +72,8 @@ class App extends React.Component <{}, StateApp> {
                     handleClickClear={this.handleClickClear}
                     error={error}
                     optionsCodeMirror={this.state.optionsCodeMirror}
+                    userFeedback={this.state.userFeedback}
             />
-            { this.state.userFeedback.length > 0 &&
-              <UserFeedback 
-                userFeedback={this.state.userFeedback}
-              />
-            }
-          </div>
       </div>
     </ThemeProvider>
     );
