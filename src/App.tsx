@@ -39,7 +39,7 @@ class App extends React.Component <{}, StateApp> {
     let options: any = {
         lineNumbers: true,
         autofocus: true,
-        theme: 'json',
+        theme: 'dracula',
         styleActiveLine: false,
         lineWrapping: true
     }
@@ -51,10 +51,13 @@ class App extends React.Component <{}, StateApp> {
   }
 
   render() {
-
+    let theme: Theme = noResquest;
+    let error: boolean|undefined;
     //It use the first element in array notification, it is the last process text.
-    const theme: Theme = this.state.userFeedback[0].error === undefined ? noResquest : standarTheme;
-    let error: boolean|undefined = this.state.userFeedback[0].error;
+    if (this.state.error !== undefined) {
+      theme = this.state.userFeedback[0].error === undefined ? noResquest : standarTheme;
+      error = this.state.userFeedback[0].error;
+    }
 
     return (
 
@@ -90,7 +93,10 @@ class App extends React.Component <{}, StateApp> {
       newFeedback.message = 'JSON valid';
 
     }catch (e) {
-
+      let string: string = e.message.split(':');
+      let temp: Array<string> = string[0].split(' ');
+      let lineNumber: number = +temp[temp.length - 1];
+      newFeedback.numLine = lineNumber;
       newFeedback.message = e.message;
       newFeedback.error = true;
 
@@ -103,7 +109,9 @@ class App extends React.Component <{}, StateApp> {
     // Add new value.
     currentOptions.value = textFormat;
 
-    let arrayFeedback: Array<userFeedback> = this.state.userFeedback;
+    // @TODO solve this problem, know only save the las error or sucess message.
+
+    let arrayFeedback: Array<userFeedback> = [];
     arrayFeedback.unshift(newFeedback);
 
     this.setState ({
@@ -125,10 +133,16 @@ class App extends React.Component <{}, StateApp> {
 
   }
 
+  /*
+   * Change text isnide codemirror and dissapear alert error or success because
+   * text is different
+   */
+
   private handleChangeText = (text: string) => {
 
     this.setState({
-      text: text
+      error: undefined,
+      text: text,
     });
 
   }

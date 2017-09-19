@@ -38,12 +38,10 @@ class UserFeedback extends React.Component <UserFeedbackProps, {}> {
 const StyledUserFeedback = styled(UserFeedback)`
     
     width: 100%;
-    background: black;
 
     ul {
-        flex-direction: column;
         display: flex;
-        align-items: flex-start;
+        flex-direction: column;
     }
 
     li {

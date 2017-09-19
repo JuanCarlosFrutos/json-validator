@@ -16,7 +16,7 @@ interface ValidatorProps {
     text: string;
     error?: boolean|undefined;
     optionsCodeMirror: any;
-    userFeedback: userFeedback;
+    userFeedback: Array<userFeedback>;
 
 }
 
@@ -42,13 +42,15 @@ class Validator extends React.Component <ValidatorProps, {}> {
 
     componentWillUpdate(nextProps: ValidatorProps, {}) {
 
-        let position: CodeMirror.Position = {line:5, ch: 3};
-        console.log(this.docCodeMirror.getValue());
-        this.docCodeMirror.setCursor(position);
-        let instance: CodeMirror.Editor = this.codeMirror.getCodeMirror();
-        instance.setOption('styleActiveLine', false);
-        
+        if (nextProps.error === true && nextProps.userFeedback[0].numLine !== undefined) {
+            console.log(nextProps.userFeedback[0].numLine);
+            let position: any = {line:nextProps.userFeedback[0].numLine, ch: 0};
+            this.docCodeMirror.setCursor(position);
+            let instance: CodeMirror.Editor = this.codeMirror.getCodeMirror();
+            instance.setOption('styleActiveLine', true);
 
+        }
+        
     }
 
     render () {
